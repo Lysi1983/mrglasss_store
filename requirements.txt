@@ -3,3 +3,5 @@ Flask-Mail
 Flask-Limiter
 python-dotenv
 gunicorn
+requests
+APScheduler
