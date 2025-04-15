@@ -1,0 +1,20 @@
+User-agent: Googlebot
+# Забрана за временни и системни файлове
+Disallow: /tmp/
+Disallow: /error.html
+Disallow: /*.log$
+Disallow: /*.sh$
+Disallow: /run_monitor.sh
+Disallow: /site_monitor.py
+Disallow: /passenger_wsgi.py
+Disallow: /wsgi.py
+Disallow: /README.md
+Disallow: /requirements.txt
+
+# Позволяваме достъп до важни директории и файлове
+Allow: /static/css/
+Allow: /static/js/
+Allow: /templates/
+
+# Sitemap
+Sitemap: https://mrglass24.com/sitemap.xml
