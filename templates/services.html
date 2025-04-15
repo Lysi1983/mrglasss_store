@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}Продукти{% endblock %}
+{% block content %}
+<section>
+    <h1>Нашите продукти</h1>
+    <style>
+       
+    </style>
+    <ul class="product-list">
+        <li class="product-item">
+            <img src="{{ url_for('static', filename='css/Glass_doors.png') }}" alt="Стъклени врати" class="product-image">
+            <div class="product-name">Стъклени врати</div>
+        </li>
+        <li class="product-item">
+            <img src="{{ url_for('static', filename='css/railing.png') }}" alt="Стъклени парапети" class="product-image">
+            <div class="product-name">Стъклени парапети</div>
+        </li>
+        <li class="product-item">
+            <img src="{{ url_for('static', filename='css/bathroom.png') }}" alt="Стъкло за душ кабина" class="product-image">
+            <div class="product-name">Стъкло за душ кабина</div>
+        </li>
+        <li class="product-item">
+            <img src="{{ url_for('static', filename='css/Glass_display_cases.png') }}" alt="Стъклени витрини" class="product-image">
+            <div class="product-name">Стъклени витрини</div>
+        </li>
+        <li class="product-item">
+            <img src="{{ url_for('static', filename='css/ogledalo.png') }}" alt="Огледала" class="product-image">
+            <div class="product-name">Огледала</div>
+        </li>
+        <li class="product-item">
+            <img src="{{ url_for('static', filename='css/fireproof.png') }}" alt="Огнеопорно стъкло" class="product-image">
+            <div class="product-name">Огнеопорно стъкло</div>
+        </li>
+        <li class="product-item">
+            <img src="{{ url_for('static', filename='css/stairs.png') }}" alt="Интериорни решения от стъкло" class="product-image">
+            <div class="product-name">Интериорни решения от стъкло</div>
+        </li>
+    </ul>
+
+    <!-- Lightbox container -->
+    <div class="lightbox" id="imageModal">
+        <span class="close-lightbox">&times;</span>
+        <div class="lightbox-content">
+            <img class="lightbox-image" id="expandedImg">
+        </div>
+    </div>
+
+    <!-- Include the lightbox JavaScript file -->
+    <script src="{{ url_for('static', filename='js/lightbox.js') }}"></script>
+</section>
+{% endblock %}
