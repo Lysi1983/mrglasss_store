@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, flash, url_for
+from flask import Flask, render_template, request, redirect, flash, url_for, jsonify
 from flask_mail import Mail, Message
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -57,9 +57,19 @@ def contact():
                       sender=email,
                       recipients=['mrglas2025@gmail.com'],
                       body=f"Име: {name}\nИмейл: {email}\n\nСъобщение:\n{message}")
+        msg_recipient = Message(subject="Вашето съобщение беше получено",
+                     sender=os.getenv('MAIL_USERNAME'),
+                     recipients=[email],
+                    
+                     html=f"""
+                     <p>Благодарим ви, че се свързахте с нас! Вашето съобщение беше получено.</p>
+                     <p><img src='{url_for('static', filename='css/logo.png', _external=True)}' alt='Mr. Glass Logo' style='max-height: 60px; border-radius: 50%;'></p>
+                     """)
         try:
             # Send email
             mail.send(msg)
+            mail.send(msg_recipient)
+            
             flash('Съобщението беше изпратено успешно!', 'success')
             return redirect(url_for('contact'))
         except Exception as e:
@@ -69,6 +79,32 @@ def contact():
             return redirect(url_for('contact'))
 
     return render_template('contact.html')
+
+@app.route('/get_images/<folder_name>')
+def get_images(folder_name):
+    # Construct path relative to the application's static folder
+    # Use app.root_path to get the application's root directory
+    base_static_path = os.path.join(app.root_path, app.static_folder or 'static')
+    image_folder_path = os.path.join(base_static_path, 'images', folder_name)
+    image_folder_url_base = f'images/{folder_name}'  # Base for URL generation
+
+    try:
+        # Security check: Ensure the resolved path is still within the intended 'static/images' directory
+        if not os.path.abspath(image_folder_path).startswith(os.path.abspath(os.path.join(base_static_path, 'images'))):
+            app.logger.warning(f"Attempt to access invalid path: {folder_name}")
+            return jsonify({"error": "Invalid folder path"}), 400  # Bad Request
+
+        if os.path.isdir(image_folder_path):
+            images = [f for f in os.listdir(image_folder_path) if os.path.isfile(os.path.join(image_folder_path, f))]
+            # Generate URLs correctly using url_for
+            image_urls = [url_for('static', filename=os.path.join(image_folder_url_base, img).replace('\\', '/')) for img in images]
+            return jsonify(image_urls)
+        else:
+            app.logger.info(f"Image folder not found: {folder_name}")
+            return jsonify({"error": "Folder not found"}), 404
+    except Exception as e:
+        app.logger.error(f"Error fetching images for {folder_name}: {e}", exc_info=True)
+        return jsonify({"error": "Internal server error"}), 500
 
 # Error handlers
 @app.errorhandler(404)
@@ -107,4 +143,7 @@ def too_many_requests(e):
                            error_description='Вие изпратихте твърде много заявки за кратък период от време.'), 429
 
 if __name__ == '__main__':
+    # Add basic logging configuration
+    import logging
+    logging.basicConfig(level=logging.INFO)
     app.run(debug=True)

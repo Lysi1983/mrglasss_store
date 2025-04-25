@@ -207,7 +207,7 @@ form button {
 }
 /* Lightbox styles */
 .lightbox {
-    display: none;
+    display: none; /* Initially hidden */
     position: fixed;
     top: 0;
     left: 0;
@@ -215,8 +215,11 @@ form button {
     height: 100%;
     background-color: rgba(0,0,0,0.9);
     z-index: 1000;
-    justify-content: center;
-    align-items: center;
+    /* display: flex; */ /* Removed: Use JS to set display to flex when shown */
+    justify-content: center; /* Center horizontally when flex */
+    align-items: center; /* Center vertically when flex */
+    padding: 20px; /* Add some padding around the content */
+    box-sizing: border-box; /* Include padding in width/height */
     backdrop-filter: blur(8px);
     transition: all 0.3s ease;
 }
@@ -259,6 +262,41 @@ form button {
     background-color: rgba(255, 255, 255, 0.2);
     transform: rotate(90deg);
 }
+
+/* Previous & Next Buttons */
+.prev-lightbox,
+.next-lightbox {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: auto;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    transition: 0.3s ease;
+    border-radius: 0 5px 5px 0; /* Rounded corners on one side */
+    background-color: rgba(0, 0, 0, 0.4);
+    border: none;
+    user-select: none; /* Prevent text selection */
+    z-index: 1001; /* Ensure they are above the image */
+}
+
+.prev-lightbox {
+    left: 15px;
+    border-radius: 5px 0 0 5px; /* Adjust rounding for left button */
+}
+
+.next-lightbox {
+    right: 15px;
+}
+
+.prev-lightbox:hover,
+.next-lightbox:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
 h5 {
     font-family: Monospace;
     margin-bottom: 0.30rem;
@@ -558,17 +596,51 @@ h5 {
         margin: 0 auto 20px; /* Center single items */
     }
 
+    .lightbox {
+        /* Ensure flex properties are explicitly set for mobile if needed */
+        /* display: flex; */ /* Already set globally */
+        /* justify-content: center; */ /* Already set globally */
+        /* align-items: center; */ /* Already set globally */
+        padding: 10px; /* Keep specific mobile padding */
+    }
+
     .lightbox-content {
         max-width: 95%;
         max-height: 85%;
+        /* Ensure the content itself doesn't prevent centering */
+        display: flex; /* Helps center the image within the content box */
+        align-items: center;
+        justify-content: center;
+    }
+
+    .lightbox-image {
+        /* Ensure image doesn't exceed container */
+        max-height: 80vh; /* Slightly reduce max height */
     }
 
     .close-lightbox {
-        top: 10px;
-        right: 10px;
-        font-size: 24px;
-        width: 35px;
-        height: 35px;
+        top: 15px; /* Increase distance from top */
+        right: 15px; /* Increase distance from right */
+        font-size: 28px; /* Slightly larger */
+        width: 38px; /* Slightly larger tap target */
+        height: 38px;
+        z-index: 1002; /* Ensure it's above nav buttons */
+    }
+
+    /* Adjust nav buttons slightly for mobile */
+    .prev-lightbox,
+    .next-lightbox {
+        padding: 12px;
+        font-size: 20px;
+        z-index: 1001;
+    }
+
+    .prev-lightbox {
+        left: 5px; /* Closer to edge */
+    }
+
+    .next-lightbox {
+        right: 5px; /* Closer to edge */
     }
 
     .contact-form input,
