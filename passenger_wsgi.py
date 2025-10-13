@@ -9,4 +9,3 @@ sys.path.insert(0, os.path.dirname(__file__))
 # и го преименуваме на 'application', както очаква Passenger.
 from app import app as application
 
-
