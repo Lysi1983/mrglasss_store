@@ -59,17 +59,9 @@ To start the application, run:
 python app.py
 ```
 
-## Monitoring
+## crontab
 
-The `site_monitor.py` script is used for monitoring the application. You can run it using:
-```bash
-python site_monitor.py
-```
-
-Alternatively, use the `run_monitor.sh` script for automated monitoring:
-```bash
-./run_monitor.sh
-```
+to run site_monitor.py
 
 ## Contributing
 
