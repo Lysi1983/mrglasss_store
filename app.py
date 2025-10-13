@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, flash, url_for, jso
 from flask_mail import Mail, Message
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+from flask_minify import Minify
 import datetime
 import os
 from dotenv import load_dotenv
@@ -19,6 +20,9 @@ app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 
 mail = Mail(app)
+
+# Configure Flask-Minify
+Minify(app=app, html=True, js=True, cssless=True)
 
 # Configure Flask-Limiter
 limiter = Limiter(
@@ -95,7 +99,10 @@ def get_images(folder_name):
             return jsonify({"error": "Invalid folder path"}), 400  # Bad Request
 
         if os.path.isdir(image_folder_path):
-            images = [f for f in os.listdir(image_folder_path) if os.path.isfile(os.path.join(image_folder_path, f))]
+            # Supported image formats including WebP
+            supported_extensions = ('.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp', '.PNG', '.JPG', '.JPEG', '.GIF', '.BMP', '.WEBP')
+            images = [f for f in os.listdir(image_folder_path) 
+                     if os.path.isfile(os.path.join(image_folder_path, f)) and f.lower().endswith(supported_extensions)]
             # Generate URLs correctly using url_for
             image_urls = [url_for('static', filename=os.path.join(image_folder_url_base, img).replace('\\', '/')) for img in images]
             return jsonify(image_urls)
