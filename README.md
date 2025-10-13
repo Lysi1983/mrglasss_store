@@ -10,7 +10,6 @@ error.log              # Log file for errors
 monitor.log            # Log file for monitoring
 passenger_wsgi.py      # WSGI configuration for Passenger
 requirements.txt       # Python dependencies
-run_monitor.sh         # Shell script for monitoring
 site_monitor.py        # Monitoring script
 wsgi.py                # WSGI configuration
 
