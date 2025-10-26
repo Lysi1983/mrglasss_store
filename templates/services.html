@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Продукти{% endblock %}
+{% block content %}
+<section>
+    <h1>Нашите продукти</h1>
+    <ul class="product-list">
+        <li class="product-item" data-folder="Glass_doors">
+            <img src="{{ url_for('static', filename='images/Glass_doors/Glass_doors.png') }}" alt="Стъклени врати" class="product-image" loading="eager">
+            <div class="product-name">Стъклени врати</div>
+        </li>
+        <li class="product-item" data-folder="railing">
+            <img src="{{ url_for('static', filename='images/railing/railing.png') }}" alt="Стъклени парапети" class="product-image" loading="eager">
+            <div class="product-name">Стъклени парапети</div>
+        </li>
+        <li class="product-item" data-folder="bathroom">
+            <img src="{{ url_for('static', filename='images/bathroom/bathroom.png') }}" alt="Стъкло за душ кабина" class="product-image" loading="lazy">
+            <div class="product-name">Стъкло за душ кабина</div>
+        </li>
+        <li class="product-item" data-folder="Glass_display_cases">
+            <img src="{{ url_for('static', filename='images/Glass_display_cases/Glass_display_cases.png') }}" alt="Стъклени витрини" class="product-image" loading="lazy">
+            <div class="product-name">Стъклени витрини</div>
+        </li>
+        <li class="product-item" data-folder="ogledalo">
+            <img src="{{ url_for('static', filename='images/ogledalo/ogledalo.png') }}" alt="Огледала" class="product-image" loading="lazy">
+            <div class="product-name">Огледала</div>
+        </li>
+        <li class="product-item" data-folder="fireproof">
+            <img src="{{ url_for('static', filename='images/fireproof/fireproof.png') }}" alt="Огнеопорно стъкло" class="product-image" loading="lazy">
+            <div class="product-name">Огнеупорно стъкло</div>
+        </li>
+        <li class="product-item" data-folder="stairs">
+            <img src="{{ url_for('static', filename='images/stairs/stairs.png') }}" alt="Интериорни решения от стъкло" class="product-image" loading="lazy">
+            <div class="product-name">Интериорни решения от стъкло</div>
+        </li>
+        <li class="product-item" data-folder="glass_visor">
+            <img src="{{ url_for('static', filename='images/glass_visor/glass_visor.jpg') }}" alt="Стъклени козирки-навеси" class="product-image" loading="lazy">
+            <div class="product-name">Стъклени козирки-навеси</div>
+        </li>
+    </ul>
+
+    <!-- Lightbox container -->
+    <div class="lightbox" id="imageGalleryModal">
+        <span class="close-lightbox">&times;</span>
+        <button class="prev-lightbox">&#10094;</button>
+        <div class="lightbox-content">
+            <img class="lightbox-image" id="galleryImage">
+        </div>
+        <button class="next-lightbox">&#10095;</button>
+    </div>
+
+    <!-- Include the lightbox JavaScript file -->
+    <script src="{{ url_for('static', filename='js/lightbox.js') }}"></script>
+</section>
+{% endblock %}

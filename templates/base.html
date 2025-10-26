@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="mrglass24 - Your trusted partner for glass solutions, including doors, railings, and more.">
+    <meta name="keywords" content="glass, glass doors, glass railings, glass solutions, mrglass24,стъкло, стъклени врати, стъклени парапети, стъклени решения,магазин за стъкло,склад за стъкло,огнеупорни стъкла,стъклени навеси,стъклени козирки">
+    <meta name="author" content="Mr. Glass 24">
+    <meta name="robots" content="index, follow">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/logo.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+       
+        <nav>
+            <a href="{{ url_for('index') }}">Начало</a>
+            <a href="{{ url_for('about') }}">За нас</a>
+            <a href="{{ url_for('services') }}">Продукти</a>
+            <a href="{{ url_for('contact') }}">Контакти</a>
+        </nav>
+       
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        &copy; 2025 MR glass store.
+    </footer>
+</body>
+</html>

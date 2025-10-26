@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Контакти{% endblock %}
+{% block content %}
+<section>
+    <h1>Свържете се с нас</h1>
+    <br>
+    <br>
+    
+    <div class="contact-container">
+        <!-- Business Card -->
+        <div class="business-card">
+            <div class="card-logo">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="MR Glass Logo">
+            </div>
+            <div class="card-content">
+                <h3>Мариан Панев</h3>
+                <h5>Управител</h3>
+                <div class="card-info">
+                    <p><i class="fa fa-phone"></i><b> тел: 0899 310 233</b></p>
+                    <p><i class="fa fa-envelope"></i><b> имейл: mrglas2025@gmail.com</b></p>
+                    <p><i class="fa fa-map-marker"></i><b> Адрес: гр. София, Дружба 2, бул. "Цветан Лазаров" 162</b></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert {{ category }}">{{ message }}</div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+            <form action="{{ url_for('contact') }}" method="post">
+                <input type="text" name="name" placeholder="Вашето име" title="Моля попълнете Вашето име! " required>
+                <input type="email" name="email" placeholder="Вашият имейл" title="Моля попълнете Вашият имейл!" required>
+                <textarea name="message" placeholder="Вашето съобщение" title="Моля попълнете Вашето съобщение!" required></textarea>
+                <button type="submit" class="button">Изпрати</button>
+            </form>
+        </div>
+    </div>
+    
+    
+</section>
+{% endblock %}
+
