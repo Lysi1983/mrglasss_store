@@ -159,6 +159,17 @@ footer {
     right: 0;
     z-index: 10;
 }
+.footer-content {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+.footer-logo {
+    height: 28px;
+    width: auto;
+    border-radius: 4px;
+    object-fit: contain;
+}
 .button {
     display: inline-block;
     background-color: #cccece;
