@@ -162,13 +162,24 @@ footer {
 .footer-content {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
 }
 .footer-logo {
     height: 28px;
     width: auto;
     border-radius: 50%;
     object-fit: contain;
+}
+.footer-mark {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: #1b2936;
+    color: #d99c4c;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.35) inset, 0 2px 6px rgba(0, 0, 0, 0.25);
+    font-family: "Segoe UI", "Roboto", "Open Sans", sans-serif;
 }
 .button {
     display: inline-block;
